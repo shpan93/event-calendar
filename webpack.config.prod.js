@@ -6,18 +6,24 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var autoprefixer = require('autoprefixer');
 
 module.exports = {
-  entry: './src/index',
-  
+  entry: './src/js/index',
+
   output: {
-    path: path.join(__dirname, 'dest/assets/js'),
+    path: path.join(__dirname, 'assets/js/'),
     filename: 'bundle.js',
-    publicPath: '/dest/assets/js'
+    publicPath: '/assets/js/'
   },
 
   plugins: [
     new ExtractTextPlugin('style.css'),
     new webpack.optimize.UglifyJsPlugin({
-        compressor: { warnings: false }
+      compressor: { warnings: false }
+    }),
+    new webpack.DefinePlugin({
+      "process.env": {
+        // This has effect on the react lib size
+        "NODE_ENV": JSON.stringify("production")
+      }
     })
   ],
 
@@ -27,13 +33,7 @@ module.exports = {
         test: /\.js$/,
         loaders: ['babel'],
         include: path.join(__dirname, 'src')
-      },
-      {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('css!sass!postcss')
       }
     ]
-  },
-
-  postcss: [ autoprefixer({ browsers: ['last 50 versions'] }) ]
+  }
 };

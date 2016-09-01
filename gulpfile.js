@@ -82,6 +82,7 @@ gulp.task('clean-bundle', function () {
 });
 gulp.task('build-bundle', function() {
     webpack(prod_config, function (err, stats) {
+        console.log(err)
     });
 });
 gulp.task('copy', function() {
@@ -91,11 +92,11 @@ gulp.task('copy', function() {
 
 
 });
-gulp.task('deploy-gh', function() {
-
-    return gulp.src('./public')
-        .pipe(ghPages());
-
-
-});
-gulp.task('deploy', ['build-bundle', 'copy', 'deploy-gh']);
+// gulp.task('deploy-gh', function() {
+//
+//     return gulp.src('./public')
+//         .pipe(ghPages());
+//
+//
+// });
+gulp.task('deploy', ['build-bundle', 'copy']);
