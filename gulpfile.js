@@ -14,6 +14,8 @@ var config = require('./webpack.config');
 var prod_config = require('./webpack.config.prod');
 var ghPages = require('gulp-gh-pages');
 
+var clean = require('gulp-clean');
+
 
 
 var src = {
@@ -56,8 +58,6 @@ gulp.task('sass', function () {
         .pipe(gulp.dest(src.css))
         .pipe(browserSync.stream());
 });
-gulp.task('default', ['clean-bundle','serve', 'webpack-dev-server']);
-
 
 
 gulp.task("webpack-dev-server", function(callback) {
@@ -99,4 +99,7 @@ gulp.task('copy', function() {
 //
 //
 // });
+
+gulp.task('default', ['clean-bundle','serve', 'webpack-dev-server']);
+
 gulp.task('deploy', ['build-bundle', 'copy']);

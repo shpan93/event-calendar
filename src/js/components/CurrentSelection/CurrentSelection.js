@@ -91,9 +91,9 @@ class CurrentSelection extends Component {
 
                                             <div className="right">
                                                 <p className="desc">
-                                                    <span class="title">Description:</span> {event.description}</p>
+                                                    <span className="title">Description:</span> {event.description}</p>
                                                 <p className="author">
-                                                    <span class="title">Author:</span> {event.author}
+                                                    <span className="title">Author:</span> {event.author}
                                                 </p>
                                             </div>
 

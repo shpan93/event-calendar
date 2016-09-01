@@ -140,13 +140,13 @@ class SearchWidget extends Component {
 
                                                 <div className="right">
                                                     <p className="desc">
-                                                        <span class="title">Description:</span>
+                                                        <span className="title">Description:</span>
                                                     <span className="result" key={cuid()}>
                                                         {this.state.searchParameter === 'description' ? this.getHighlighted(description) :description}
                                                 </span>
                                                     </p>
                                                     <p className="author" >
-                                                        <span class="title">Author:</span>
+                                                        <span className="title">Author:</span>
                                                     <span className="result" key={cuid()}>
 
                                                     {(this.state.searchParameter === 'author' ? this.getHighlighted(author):author)}
