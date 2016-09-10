@@ -2,40 +2,21 @@ import React, {Component} from 'react';
 
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as actions from '../../actions';
+import * as actions from '../actions';
 import moment from 'moment';
-import {dateFormat, hourFormat,durationFormat} from '../../constants/index'
-import Chip from 'material-ui/Chip';
-import  "moment-duration-format";
+import {dateFormat, hourFormat,durationFormat} from '../constants/index';
+
+import "moment-duration-format";
 import cuid from 'cuid';
 
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import RemoveIcon from 'material-ui/svg-icons/action/delete';
 class CurrentSelection extends Component {
-    // static propTypes = {
-    //     autoPlay: React.PropTypes.bool.isRequired,
-    //     maxLoops: React.PropTypes.number.isRequired,
-    //     posterFrameSrc: React.PropTypes.string.isRequired,
-    //     videoSrc: React.PropTypes.string.isRequired,
-    // }
-
-
     constructor(props) {
         super(props);
-        // this.state = {
-        //     matchedEvents: this.getMatchedEvents(this.props.selectedDay,this.props.events)
-        // }
-
 
     }
 
-    componentDidUpdate(prevProps, prevState){
-        // if(prevProps.selectedDay !== this.props.selectedDay){
-        //     this.setState({
-        //         matchedEvents: this.getMatchedEvents(this.props.selectedDay,this.props.events)
-        //     })
-        // }
-    }
     getMatchedEvents(day, events){
         return  events.filter(event => (
             event.day == day.date.format(dateFormat)
@@ -46,7 +27,7 @@ class CurrentSelection extends Component {
     }
     render() {
 
-        let  matchedEvents = this.getMatchedEvents(this.props.selectedDay,this.props.events);
+        let matchedEvents = this.getMatchedEvents(this.props.selectedDay,this.props.events);
 
 
         return (

@@ -1,17 +1,11 @@
 import React, {Component} from 'react';
 
 export  default  class DisplayHeader extends Component{
-	constructor(props) {
-		super(props);
-		// this.store = this.props.store;
-	}
-
 	handleUpdatePeriod(update) {
 		this.props.updateAction(update);
 	}
 
 	render(){
-	//	{this.props.caption}
 		return (
 
 				<div className="display-header mdl-layout__header-row mdl-shadow--1dp">

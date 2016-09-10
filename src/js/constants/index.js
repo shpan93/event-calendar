@@ -1,4 +1,3 @@
-//import moment from 'moment';
 export const dateFormat = 'DD-MM-YYYY';
 export const hourFormat = 'HHmm';
 export const durationFormat = 'HH:mm';

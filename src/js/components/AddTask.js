@@ -2,31 +2,23 @@ import React, {Component} from 'react';
 
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as actions from '../../actions';
+import * as actions from '../actions';
+
 import moment from 'moment';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import {dateFormat,timeFormat,minEventLength,startRange,endRange} from '../../constants/index'
+import {dateFormat,timeFormat,minEventLength,startRange,endRange} from '../constants/index'
 import cuid from 'cuid';
 import Checkbox from 'material-ui/Checkbox';
 
 
 // import TimePicker from 'material-ui/TimePicker';
 import TimePicker from 'rc-time-picker';
-
 import ArrowDown from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
 import ArrowUp from 'material-ui/svg-icons/hardware/keyboard-arrow-up';
 import IconButton from 'material-ui/IconButton';
 
 class AddTask extends Component {
-    // static propTypes = {
-    //     autoPlay: React.PropTypes.bool.isRequired,
-    //     maxLoops: React.PropTypes.number.isRequired,
-    //     posterFrameSrc: React.PropTypes.string.isRequired,
-    //     videoSrc: React.PropTypes.string.isRequired,
-    // }
-
-
     constructor(props) {
         super(props);
         this.state = {
@@ -43,16 +35,7 @@ class AddTask extends Component {
         }
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        // if(prevProps.selectedDay !== this.props.selectedDay){
-        //     this.setState({
-        //         matchedEvents: this.getMatchedEvents(this.props.selectedDay,this.props.events)
-        //     })
-        // }
-    }
-
     componentDidMount() {
-        //console.log(this.refs.author.input.value)
         const _self = this;
         const matchedEvents = this.props.events.filter(event => (
             event.day == _self.props.selectedDay.date.format(dateFormat)
@@ -65,19 +48,12 @@ class AddTask extends Component {
         let {startDate, endDate ,day}= currentEvent;
         let eventsOfDay = this.props.events.filter(event => event.day == day);
         eventsOfDay.forEach(event => {
-         // console.log(moment(event.startDate).diff(currentEvent.startDate));
 
             let eventStartTime = moment(event.startDate,'HHmm');
             let eventEndTime = moment(event.endDate,'HHmm');
             if( !((eventStartTime.diff(startDate) <= 0 && eventStartTime.diff(endDate) >= 0) || (eventEndTime.diff(startDate) <=0 && eventEndTime.diff(endDate) <= 0)  ) ){
                 canAdd = false;
             }
-            // console.log(day);
-            // console.log(startDate);
-            // console.log(endDate);
-            // console.log(eventStartTime);
-            // console.log(eventEndTime);
-            // console.log((startDate.diff(eventStartTime) <= 0 && startDate.diff(eventEndTime) >= 0) || (endDate.diff(eventStartTime) <=0 && endDate.diff(eventStartTime) <= 0)   );
 
         });
         console.log(eventsOfDay, canAdd)
@@ -128,19 +104,10 @@ class AddTask extends Component {
     }
 
     handleRefInputChange(target, e) {
-        let isValid;
         const targetValue = `${target}Value`;
-
-        // if(target == 'Repeat'){
-        //
-        // }else{
-        //
-        // }
-
         this.setState({
             [targetValue]: e.target.value,
         });
-
     }
 
     getHours() {
@@ -164,16 +131,12 @@ class AddTask extends Component {
         for (let i = start; i <= end; i += delta) {
             arr.push(i);
         }
-
-
         return arr
     }
 
     getDisabled(where, arr) {
         return where.filter(hour => !arr.includes(hour));
     }
-
-
     disabledHours() {
         const _self = this;
         let basicHoursList = this.getArrayInRange(+this.state.startRange.get('hours'), +this.state.endRange.get('hours'));
@@ -187,7 +150,6 @@ class AddTask extends Component {
 
         return this.getDisabled(this.getArrayInRange(0, 23), filteredHours)
     }
-
     disabledMinutes(h) {
         const _self = this;
         let basicMinutes = this.getArrayInRange(0, 59);
@@ -199,7 +161,6 @@ class AddTask extends Component {
         return this.getDisabled(basicMinutes, filteredMinutes)
 
     }
-
     getDisabledInRange(timeList, eventList, hour = false) {
         let filtered = timeList.filter(time => {
             let disabled = false;
@@ -239,15 +200,10 @@ class AddTask extends Component {
         });
         console.log(value)
     }
-
-    // getTimeWithDelta(momentTime){
-    //     return momentTime;
-    // }
     disabledEndHours() {
         const _self = this;
 
 
-        //  let start = this.state.startDate.add(15, 'minute');
         let startWithMinTime = this.state.startWithDelta;
 
         let matchedEvents = this.props.events.filter(event => (
@@ -255,7 +211,6 @@ class AddTask extends Component {
         )).sort((a, b) => (
             (moment(a.startDate, 'HHmm').isBefore(moment(b.startDate, 'HHmm')) ? -1 : 1)
         ));
-        ;
 
 
         let closestEvent;
@@ -278,17 +233,13 @@ class AddTask extends Component {
     disabledEndMinutes(h) {
 
         const _self = this;
-        const startWithMinTime = this.state.startWithDelta;// moment(this.state.startDate).add(15, 'minute');
+        const startWithMinTime = this.state.startWithDelta;
 
-        // const startWithMinTime =
-        //  let start = this.state.startDate.add(15, 'minute');
         let matchedEvents = this.props.events.filter(event => (
             event.day == _self.props.selectedDay.date.format(dateFormat)
         )).sort((a, b) => (
             (moment(a.startDate, 'HHmm').isBefore(moment(b.startDate, 'HHmm')) ? -1 : 1)
         ));
-        ;
-
 
         let closestEvent = null;
         for (let eventId in matchedEvents) {

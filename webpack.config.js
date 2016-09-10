@@ -13,7 +13,6 @@ module.exports = {
     'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server',
     './src/js/index',
-      //'./index'
   ],
 
   output: {
@@ -24,7 +23,6 @@ module.exports = {
 
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    //new OpenBrowserPlugin({ url: 'http://localhost:3000' })
   ],
 
   module: {

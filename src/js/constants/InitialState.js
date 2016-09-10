@@ -1,20 +1,10 @@
 import moment from 'moment';
-import {createDay} from '../utils/index'
-import {dateFormat} from '../constants/index'
+import {createDay} from '../utils/index';
 export const INITIAL_STATE = {
     data: {
         isNewTaskWidgetOpened:false,
         today: createDay(moment().set({hour:0, minute:0,second:0})),
-        displayed: {
-            date: moment(),
-            year: moment().year(),
-            month: moment().format('MMMM'),
-            monthIndex: moment().month() + 1,
-            weekIndex: moment().week(),
-            dayIndex: moment().date(),
-            time: moment().format('H:MM'),
-            YMD: moment().format(dateFormat),
-        },
+        displayed: createDay(),
         selectedDay: createDay(),
         events: [
             {
