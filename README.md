@@ -9,8 +9,10 @@
 ````
 gulp
 ````
-Then visit `localhost:3000` in your browser.
-or 
+Then visit `localhost:3000` in your browser
+
+or
+ 
 ````
 npm start
 ````
