@@ -6,7 +6,7 @@ import * as actions from '../actions';
 /*redux*/
 import Calendar from 'node-calendar';
 import moment from 'moment';
-import cuid from 'cuid';
+;
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
@@ -135,7 +135,7 @@ class MonthView extends Component {
 
                                     <div className={dayStyle}
                                          data-tasks={day.tasks.length > 0 ? `${day.tasks.length} events` : ''}
-                                         key={cuid()} onClick={this.setSelectedDay.bind(this,day)}>
+                                         key={keyWeek+'-'+keyDay} onClick={this.setSelectedDay.bind(this,day)}>
 
 
                                         <FloatingActionButton
@@ -151,7 +151,7 @@ class MonthView extends Component {
                                         {day.tasks.length > 0 && (
                                             <ul className="events">
                                                 {day.tasks.map((task, taskIndex) => (
-                                                    <li key={cuid()}>
+                                                    <li key={taskIndex+'-'+JSON.stringify(task)}>
                                        <span className="time-range">
                                            {`${task.startDate} - ${task.endDate}`}
                                        </span>
@@ -172,7 +172,7 @@ class MonthView extends Component {
                                 )
                             });
                             return (
-                                <div className="week" key={cuid()}>{days}</div>
+                                <div className="week" key={keyWeek}>{days}</div>
                             )
                         })}
                     </div>

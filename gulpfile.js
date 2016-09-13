@@ -6,6 +6,7 @@ var plumber = require('gulp-plumber');
 var autoprefixer = require('gulp-autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
 var reload = browserSync.reload;
+var addsrc = require("gulp-add-src");
 
 
 var webpack = require('webpack');
@@ -87,8 +88,10 @@ gulp.task('build-bundle', function() {
 });
 gulp.task('copy', function() {
 
-    return gulp.src(['./assets/**/*', 'index.html'])
-        .pipe(gulp.dest('./public'));
+    return gulp.src(['./assets/**/*'])
+        .pipe(gulp.dest('./public/assets'))
+        .pipe(addsrc('index.html'))
+        .pipe(gulp.dest('./public/'));
 
 
 });

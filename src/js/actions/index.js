@@ -2,7 +2,6 @@ import * as types from '../constants/ActionTypes';
 import {push} from 'react-router-redux';
 
 
-//import $ from 'jquery';
 export function updateDisplayedDate(day) {
     return {
         type: types.UPDATE_DISPLAYED,

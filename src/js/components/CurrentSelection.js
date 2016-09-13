@@ -7,7 +7,7 @@ import moment from 'moment';
 import {dateFormat, hourFormat,durationFormat} from '../constants/index';
 
 import "moment-duration-format";
-import cuid from 'cuid';
+;
 
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import RemoveIcon from 'material-ui/svg-icons/action/delete';
@@ -62,7 +62,7 @@ class CurrentSelection extends Component {
 
 
 
-                                    return ( <li key={cuid()}>
+                                    return ( <li key={`${event}-${startDate}`}>
                                             <div className="time-range">
                                                 <p>{startDate}</p>
                                                 <p className="diff">{difference}</p>

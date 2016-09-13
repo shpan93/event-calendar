@@ -1,5 +1,4 @@
 export AddTask from './AddTask';
-export Button from './Button';
 export CurrentSelection from './CurrentSelection';
 export DaysHeader from './DaysHeader';
 export DisplayHeader from './DisplayHeader';

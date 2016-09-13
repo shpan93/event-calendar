@@ -10,7 +10,7 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 
-import cuid from 'cuid';
+;
 import {createDay} from '../utils/index';
 import  "moment-duration-format";
 import ArrowDown from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
@@ -32,17 +32,17 @@ class SearchWidget extends Component {
 
     handleSearch(e) {
         this.setState({
-            searchKey:e.target.value
+            searchKey:e.target.value.toLowerCase().trim()
         });
     }
 
-    getHighlighted = (string, key = this.state.searchKey.toLowerCase().trim()) => {
+    getHighlighted = (string, key = this.state.searchKey) => {
         if (typeof string === 'string') {
             let startIndex = string.toLowerCase().indexOf(key);
             let endIndex = startIndex + key.length;
 
             return (
-                <span key={string + key + cuid()}
+                <span key={string + key }
                       className="highlighted">{string.substring(0, startIndex)}<i>{string.substring(startIndex, endIndex)}</i>{string.substring(endIndex, string.length)}</span>
             )
         } else {
@@ -53,7 +53,7 @@ class SearchWidget extends Component {
 
     render() {
 
-        let matchedEvents = this.props.events.filter(event => event[this.state.searchParameter].toLowerCase().indexOf(this.state.searchKey.toLowerCase().trim()) !== -1)
+        let matchedEvents = this.props.events.filter(event => event[this.state.searchParameter].toLowerCase().indexOf(this.state.searchKey) !== -1)
             .sort((a, b) => (
                 (moment(a.day + a.startDate, dateFormat + hourFormat).isBefore(moment(a.day + a.startDate, dateFormat + hourFormat)) ? -1 : 1)
             ));
@@ -117,7 +117,7 @@ class SearchWidget extends Component {
                                         const momentDay = createDay(moment(day, dateFormat));
 
 
-                                        return (<li key={cuid()}
+                                        return (<li key={`${author}-${startDate}`}
                                                     onClick={()=>{this.props.actions.setSelectedDay(momentDay);this.props.actions.updateDisplayedDate(momentDay)}}>
                                                 <div className="time-range">
                                                     <p>{day}</p>
@@ -129,13 +129,13 @@ class SearchWidget extends Component {
                                                 <div className="right">
                                                     <p className="desc">
                                                         <span className="title">Description:</span>
-                                                    <span className="result" key={cuid()}>
+                                                    <span className="result" key={description+'-'+startDate}>
                                                         {this.state.searchParameter === 'description' ? this.getHighlighted(description) : description}
                                                 </span>
                                                     </p>
                                                     <p className="author">
                                                         <span className="title">Author:</span>
-                                                    <span className="result" key={cuid()}>
+                                                    <span className="result" key={description+'-'+startDate}>
 
                                                     {(this.state.searchParameter === 'author' ? this.getHighlighted(author) : author)}
                                                     </span>

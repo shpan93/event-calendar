@@ -8,7 +8,7 @@ import moment from 'moment';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {dateFormat,timeFormat,minEventLength,startRange,endRange} from '../constants/index'
-import cuid from 'cuid';
+;
 import Checkbox from 'material-ui/Checkbox';
 
 
@@ -72,7 +72,7 @@ class AddTask extends Component {
                 startDate: startDate.format('HH:mm'),
                 endDate: endDate.format('HH:mm'),
                 day: date.format(dateFormat),
-                cuid: cuid()
+                cuid: `${creator}-${date}`
             });
         };
 

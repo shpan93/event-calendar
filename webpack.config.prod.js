@@ -7,7 +7,9 @@ var autoprefixer = require('autoprefixer');
 
 module.exports = {
   entry: './src/js/index',
-
+  node: {
+    fs: "empty"
+  },
   output: {
     path: path.join(__dirname, 'assets/js/'),
     filename: 'bundle.js',
